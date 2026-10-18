@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>城南蜃樓 作品提案</title>
+<meta name="description" content="陳靖升應徵第 32 屆臺大藝術季設計部與工作坊企劃部的作品頁：生成式主視覺、瀏覽器 AR 臉譜濾鏡、海報產生器與工作坊企劃。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=IBM+Plex+Mono&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#07080d; --surface:#0f1119; --line:#262a38;
+  --text:#ece6da; --muted:#9c978d; --accent:#ff4a3d; --jade:#2de2c4;
+  --serif:"Noto Serif TC", serif;
+  --sans:"Inter","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 var(--sans);overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.03em;color:var(--muted)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+@media (max-width:640px){.wrap{padding:0 16px}}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:linear-gradient(var(--bg),transparent)}
+nav .who{font-family:var(--serif);font-weight:700}
+nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0}
+nav a{text-decoration:none;font-size:14px;color:var(--muted)}
+nav a:hover{color:var(--text)}
+@media (max-width:760px){nav ul{display:none}}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:560px;overflow:hidden}
+#mirage{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-copy{position:absolute;left:max(24px,calc((100vw - 1160px)/2 + 24px));bottom:7vh;max-width:36em;padding:24px 28px 24px 0;background:radial-gradient(ellipse at 30% 60%,rgba(7,8,13,.92) 40%,rgba(7,8,13,0) 80%)}
+.hero-copy p{max-width:30em}
+.hero h1{white-space:nowrap;font-family:var(--serif);font-weight:900;font-size:clamp(52px,10vw,128px);line-height:1.05;margin:0;letter-spacing:0}
+.hero h1 span{color:var(--accent);text-shadow:0 0 24px rgba(255,74,61,.55)}
+.hero p{margin:12px 0 0;color:var(--muted)}
+.hero .tag{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:2px 10px;border-radius:2px;font-size:13px;margin-bottom:16px}
+.hero .vert{position:absolute;right:max(24px,calc((100vw - 1160px)/2 + 24px));top:96px;writing-mode:vertical-rl;font-family:var(--serif);font-size:15px;letter-spacing:.3em;color:var(--muted)}
+@media (max-width:640px){.hero .vert{display:none}.hero-copy{left:16px;right:16px}}
+
+section{padding:112px 0;border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:13px;color:var(--accent);margin:0 0 8px}
+h2{font-family:var(--serif);font-weight:900;font-size:clamp(32px,4.6vw,52px);line-height:1.2;margin:0 0 20px}
+.lead{max-width:34em;color:var(--muted);margin:0 0 40px}
+
+.btn{font:500 15px/1.2 var(--sans);background:var(--accent);color:#120403;border:0;border-radius:2px;padding:12px 20px;cursor:pointer;transition:transform .15s, box-shadow .15s}
+.btn:hover{box-shadow:0 0 22px rgba(255,74,61,.5)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.btn:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+
+/* AR */
+.ar{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:start}
+@media (max-width:860px){.ar{grid-template-columns:1fr}}
+.stage{position:relative;aspect-ratio:4/3;background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.stage video{display:none}
+.stage canvas{width:100%;height:100%;display:block}
+.stage .hint{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted)}
+.ar dl{margin:24px 0 0}
+.ar dt{font-weight:700;margin-top:16px}
+.ar dd{margin:4px 0 0;color:var(--muted)}
+
+/* poster */
+.poster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:center}
+@media (max-width:860px){.poster{grid-template-columns:1fr}}
+#posterCanvas{width:100%;max-width:520px;aspect-ratio:1/1.414;display:block;justify-self:center;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+
+/* workshop */
+.timeline{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.timeline li{position:relative;padding:0 0 32px 32px;max-width:40em}
+.timeline li::before{content:"";position:absolute;left:-5px;top:9px;width:9px;height:9px;background:var(--accent);transform:rotate(45deg)}
+.timeline .t{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.timeline h3{margin:2px 0 4px;font-size:19px}
+.timeline p{margin:0;color:var(--muted)}
+.timeline a{color:var(--text);text-decoration-color:var(--accent);text-underline-offset:3px}
+
+footer{padding:40px 0 56px;border-top:1px solid var(--line)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .4s ease-out,transform .4s ease-out}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="who">陳靖升</span>
+  <ul>
+    <li><a href="#ar">AR 臉譜</a></li>
+    <li><a href="#poster">海報產生器</a></li>
+    <li><a href="#workshop">工作坊企劃</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <canvas id="mirage" aria-label="生成式主視覺：傅鐘與椰林的剪影在地平線上形成蜃樓倒影，滑鼠移動會改變扭曲程度"></canvas>
+  <div class="vert">傅鐘餘音　椰林記憶　駭入日常</div>
+  <div class="hero-copy">
+    <span class="tag">應徵　設計部・工作坊企劃部</span>
+    <h1>城南<span>蜃樓</span></h1>
+    <p>第 32 屆臺大藝術季的視覺與工作坊提案。<br>個人應徵作品，非官方網站。</p>
+  </div>
+</header>
+
+<main>
+
+<section id="ar">
+  <div class="wrap">
+    <h2>AR 戲曲臉譜</h2>
+    <p class="lead">打開鏡頭，臉上會出現霓虹臉譜。畫面只在你的裝置上處理，不會上傳。</p>
+    <div class="ar reveal">
+      <div>
+        <div class="stage">
+          <video id="cam" playsinline muted></video>
+          <canvas id="arCanvas" width="960" height="720"></canvas>
+          <div class="hint" id="arHint">按下「開啟鏡頭」開始<br>手機與筆電都可以用</div>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <button class="btn" id="camBtn">開啟鏡頭</button>
+        </div>
+        <p class="mono" style="margin:24px 0 8px">臉譜顏色</p>
+        <div class="row" id="maskBtns">
+          <button class="btn ghost" data-mask="red" aria-pressed="true">紅・忠勇</button>
+          <button class="btn ghost" data-mask="black" aria-pressed="false">黑・剛直</button>
+          <button class="btn ghost" data-mask="white" aria-pressed="false">白・多疑</button>
+          <button class="btn ghost" data-mask="cyber" aria-pressed="false">青・賽博</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="poster">
+  <div class="wrap poster">
+    <div class="reveal">
+      <h2>校園記憶<br>海報產生器</h2>
+      <p class="lead">選一個校園記憶，生成一張海報。每按一次「換一張」都不一樣。</p>
+      <div class="chips" id="chips"></div>
+      <div class="row">
+        <button class="btn" id="reroll">換一張</button>
+        <button class="btn ghost" id="download">下載 PNG</button>
+      </div>
+      <p class="mono" id="seedLabel" style="margin-top:16px"></p>
+    </div>
+    <canvas id="posterCanvas" width="1240" height="1754" aria-label="生成的海報"></canvas>
+  </div>
+</section>
+
+<section id="workshop">
+  <div class="wrap">
+    <h2>兩小時，做出自己的臉譜濾鏡</h2>
+    <p class="lead">給沒寫過程式的同學，帶一台筆電或手機就能參加。</p>
+    <ol class="timeline reveal">
+      <li><span class="t">15 分鐘</span><h3>臉譜在說什麼</h3><p>紅、黑、白各代表什麼性格。</p></li>
+      <li><span class="t">30 分鐘</span><h3>畫出第一個會動的圖形</h3><p>打開 <a href="https://editor.p5js.org/" target="_blank" rel="noopener">p5.js 線上編輯器</a>，打幾行字就能畫圓、畫線，不用安裝。</p></li>
+      <li><span class="t">45 分鐘</span><h3>把圖形貼到臉上</h3><p>用 <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker" target="_blank" rel="noopener">MediaPipe</a> 找出臉的位置，再改顏色和線條，做出自己的臉譜。</p></li>
+      <li><span class="t">20 分鐘</span><h3>用 AI 生成背景</h3><p>做一張校園記憶的背景圖。</p></li>
+      <li><span class="t">10 分鐘</span><h3>分享</h3><p>掃 QR code，互相玩彼此的濾鏡。</p></li>
+    </ol>
+  </div>
+</section>
+
+
+</main>
+
+<footer>
+  <div class="wrap row" style="justify-content:space-between;gap:16px">
+    <span class="mono">陳靖升　·　臺大資工所博士生　·　本頁由我構思，以 AI 程式助理協助製作</span>
+    <span class="mono">d14922013@ntu.edu.tw　·　<a href="https://lplpp163.github.io">個人網站</a></span>
+  </div>
+</footer>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---------- seeded random ---------- */
+function rng(seed){ let s = seed >>> 0; return () => { s = (s + 0x6D2B79F5) >>> 0; let t = s; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* ---------- hero mirage ---------- */
+(() => {
+  const cv = document.getElementById('mirage'), ctx = cv.getContext('2d');
+  const sky = document.createElement('canvas'), sctx = sky.getContext('2d');
+  let W, H, horizon, dpr, mx = .5, t = 0;
+  const glyphs = '生旦淨末丑忠勇蜃樓夢境01ﾊｯｸ駭';
+  let drops = [];
+
+  function palm(c, x, base, h, r){
+    c.beginPath(); c.moveTo(x, base);
+    c.quadraticCurveTo(x + h*.08*(r()-.5)*4, base - h*.5, x + h*.05, base - h); c.stroke();
+    const tx = x + h*.05, ty = base - h;
+    for (let i = 0; i < 9; i++){
+      const a = -Math.PI/2 + (i - 4) * .38 + (r()-.5)*.2, len = h*(.28 + r()*.1);
+      c.beginPath(); c.moveTo(tx, ty);
+      c.quadraticCurveTo(tx + Math.cos(a)*len*.6, ty + Math.sin(a)*len*.6 - h*.04, tx + Math.cos(a)*len, ty + Math.sin(a)*len + len*.35); c.stroke();
+    }
+  }
+  function bell(c, x, base, h){
+    // 傅鐘：兩根柱、橫樑、起翹的屋簷，鐘懸在中間
+    const w = h*.62, pil = h*.07;
+    c.fillRect(x - w/2, base - h*.72, pil, h*.72);
+    c.fillRect(x + w/2 - pil, base - h*.72, pil, h*.72);
+    c.fillRect(x - w*.58, base - h*.78, w*1.16, h*.07);
+    c.beginPath();
+    c.moveTo(x - w*.85, base - h*.80);
+    c.quadraticCurveTo(x - w*.55, base - h*.84, x - w*.38, base - h*.98);
+    c.lineTo(x + w*.38, base - h*.98);
+    c.quadraticCurveTo(x + w*.55, base - h*.84, x + w*.85, base - h*.80);
+    c.lineTo(x + w*.6, base - h*.78); c.lineTo(x - w*.6, base - h*.78); c.closePath(); c.fill();
+    c.fillRect(x - h*.012, base - h*.71, h*.024, h*.09);
+    c.beginPath();
+    c.moveTo(x - w*.2, base - h*.3);
+    c.quadraticCurveTo(x - w*.22, base - h*.62, x, base - h*.62);
+    c.quadraticCurveTo(x + w*.22, base - h*.62, x + w*.2, base - h*.3);
+    c.closePath(); c.fill();
+    c.fillRect(x - w*.24, base - h*.31, w*.48, h*.03);
+  }
+  function buildSky(){
+    sky.width = W; sky.height = horizon;
+    const r = rng(32);
+    sctx.clearRect(0, 0, W, horizon);
+    sctx.strokeStyle = sctx.fillStyle = '#ece6da'; sctx.lineCap = 'round';
+    const unit = Math.min(H*.42, 360, W*.6);
+    // palm boulevard, receding
+    for (let i = 0; i < 16; i++){
+      const side = i % 2 ? 1 : -1, k = 1 - Math.floor(i/2)/8;
+      const x = W*.5 + side*W*(.14 + k*.38), h = unit*(.35 + k*.75);
+      sctx.lineWidth = 1.2 + k*2.4;
+      sctx.globalAlpha = .45 + k*.45;
+      palm(sctx, x, horizon, h, r);
+    }
+    sctx.globalAlpha = 1;
+    bell(sctx, W*.5, horizon, unit*.62);
+  }
+  function resize(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight; horizon = Math.round(H*.56);
+    cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    buildSky();
+    const r = rng(7); drops = Array.from({length: Math.round(W/38)}, () => ({x: r()*W, y: r()*H, v: .3 + r()*.8, g: glyphs[Math.floor(r()*glyphs.length)]}));
+  }
+  function frame(){
+    t += .016;
+    ctx.fillStyle = '#07080d'; ctx.fillRect(0, 0, W, H);
+    // sky glow
+    const g = ctx.createRadialGradient(W*.5, horizon, 10, W*.5, horizon, W*.6);
+    g.addColorStop(0, 'rgba(255,74,61,.28)'); g.addColorStop(1, 'rgba(255,74,61,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // floating glyphs
+    ctx.font = '14px "Noto Serif TC", serif';
+    for (const d of drops){
+      d.y -= d.v; if (d.y < -20) d.y = H + 20;
+      ctx.fillStyle = `rgba(45,226,196,${.12 + .1*Math.sin(t + d.x)})`; ctx.fillText(d.g, d.x, d.y);
+    }
+    // upper image with mild shimmer
+    const amp = 1 + mx*5;
+    for (let y = 0; y < horizon; y += 2){
+      const dx = Math.sin(y*.045 + t*2.2)*amp*(y/horizon);
+      ctx.drawImage(sky, 0, y, W, 2, dx, y, W, 2);
+    }
+    // mirage reflection: flipped, stronger wave, tinted
+    const reflH = H - horizon;
+    ctx.save(); ctx.globalAlpha = .55;
+    for (let y = 0; y < reflH; y += 2){
+      const srcY = horizon - 1 - y*(horizon/reflH)*.9;
+      if (srcY < 0) break;
+      const dx = Math.sin(y*.09 - t*3)*(4 + mx*22)*(y/reflH + .2);
+      ctx.drawImage(sky, 0, srcY, W, 2, dx, horizon + y, W, 2);
+    }
+    ctx.restore();
+    ctx.fillStyle = 'rgba(255,74,61,.22)'; ctx.globalCompositeOperation = 'multiply'; ctx.fillRect(0, horizon, W, reflH); ctx.globalCompositeOperation = 'source-over';
+    // horizon line
+    ctx.fillStyle = '#ff4a3d'; ctx.shadowColor = '#ff4a3d'; ctx.shadowBlur = 16; ctx.fillRect(0, horizon, W, 1.5); ctx.shadowBlur = 0;
+    // glitch slices
+    if (!reduce && Math.random() < .04){
+      const y = Math.random()*H, h = 4 + Math.random()*30, off = (Math.random()-.5)*60;
+      ctx.drawImage(cv, 0, y*dpr, W*dpr, h*dpr, off, y, W, h);
+      ctx.fillStyle = 'rgba(45,226,196,.15)'; ctx.fillRect(0, y, W, h);
+    }
+    // scanlines
+    ctx.fillStyle = 'rgba(0,0,0,.18)';
+    for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  addEventListener('pointermove', e => { mx = e.clientX / innerWidth; });
+  addEventListener('resize', () => { resize(); if (reduce) frame(); });
+  resize(); frame();
+  document.fonts && document.fonts.ready.then(() => reduce && frame());
+})();
+
+/* ---------- poster generator ---------- */
+(() => {
+  const cv = document.getElementById('posterCanvas'), c = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const memories = [
+    {k:'傅鐘', en:'FU BELL', motif:'bell'},
+    {k:'椰林大道', en:'ROYAL PALM BLVD', motif:'palm'},
+    {k:'舊書頁', en:'OLD PAGES', motif:'page'},
+    {k:'雨後草地', en:'AFTER RAIN', motif:'rain'},
+    {k:'醉月湖', en:'DRUNK MOON LAKE', motif:'lake'},
+  ];
+  const palettes = [
+    ['#07080d','#ff4a3d','#ece6da','#2de2c4'],
+    ['#0b0614','#ff3d8b','#f3e9d8','#5ad1ff'],
+    ['#ece6da','#c8261d','#111111','#0f8f7e'],
+  ];
+  let mem = 0, seed = Math.floor(Math.random()*1e6);
+  const chips = document.getElementById('chips');
+  memories.forEach((m, i) => {
+    const b = document.createElement('button');
+    b.className = 'btn ghost'; b.textContent = m.k; b.setAttribute('aria-pressed', i === mem);
+    b.onclick = () => { mem = i; [...chips.children].forEach((x, j) => x.setAttribute('aria-pressed', j === i)); draw(); };
+    chips.appendChild(b);
+  });
+  document.getElementById('reroll').onclick = () => { seed = Math.floor(Math.random()*1e6); draw(); };
+  document.getElementById('download').onclick = () => {
+    cv.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `southopia_${memories[mem].en.replace(/ /g,'-').toLowerCase()}_${seed}.png`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); });
+  };
+
+  const motifs = {
+    bell(r, P, cx, cy){ c.strokeStyle = P[2]; c.lineWidth = 6; c.beginPath(); c.moveTo(cx-130, cy+160); c.quadraticCurveTo(cx-140, cy-120, cx, cy-140); c.quadraticCurveTo(cx+140, cy-120, cx+130, cy+160); c.closePath(); c.stroke(); c.beginPath(); c.arc(cx, cy+175, 22, 0, Math.PI*2); c.fillStyle = P[1]; c.fill(); },
+    palm(r, P, cx, cy){ c.strokeStyle = P[2]; c.lineWidth = 5; for (let i = 0; i < 7; i++){ const x = cx - 360 + i*120, h = 380 + r()*160; c.beginPath(); c.moveTo(x, cy+300); c.lineTo(x+10, cy+300-h); c.stroke(); for (let j = 0; j < 7; j++){ const a = -Math.PI/2 + (j-3)*.45; c.beginPath(); c.moveTo(x+10, cy+300-h); c.quadraticCurveTo(x+10+Math.cos(a)*60, cy+300-h+Math.sin(a)*60, x+10+Math.cos(a)*110, cy+300-h+Math.sin(a)*110+50); c.stroke(); } } },
+    page(r, P, cx, cy){ c.fillStyle = P[2]; for (let i = 0; i < 28; i++){ const w = 300 + r()*360; c.globalAlpha = .25 + r()*.6; c.fillRect(cx - 330, cy - 300 + i*22, w, 6); } c.globalAlpha = 1; },
+    rain(r, P, cx, cy){ c.strokeStyle = P[3]; c.lineWidth = 3; for (let i = 0; i < 140; i++){ const x = cx - 500 + r()*1000, y = cy - 500 + r()*900, l = 30 + r()*90; c.globalAlpha = .3 + r()*.6; c.beginPath(); c.moveTo(x, y); c.lineTo(x - l*.25, y + l); c.stroke(); } c.globalAlpha = 1; },
+    lake(r, P, cx, cy){ c.strokeStyle = P[3]; for (let i = 1; i < 16; i++){ c.lineWidth = 2 + (i%3); c.globalAlpha = 1 - i/17; c.beginPath(); c.ellipse(cx, cy+260, i*36, i*10, 0, 0, Math.PI*2); c.stroke(); } c.globalAlpha = 1; c.fillStyle = P[2]; c.beginPath(); c.arc(cx+180, cy-220, 70, 0, Math.PI*2); c.fill(); },
+  };
+
+  function draw(){
+    const r = rng(seed*7 + mem), m = memories[mem], P = palettes[seed % palettes.length];
+    c.fillStyle = P[0]; c.fillRect(0, 0, W, H);
+    const cx = W*.5, cy = H*.46;
+    // 21 rings of the bell
+    for (let i = 0; i < 21; i++){
+      const rad = 120 + i*26, seg = 6 + Math.floor(r()*10);
+      c.lineWidth = i % 5 === 0 ? 5 : 2;
+      c.strokeStyle = i % 7 === 0 ? P[1] : P[2];
+      c.globalAlpha = .18 + r()*.45;
+      for (let s = 0; s < seg; s++){
+        const a0 = r()*Math.PI*2, a1 = a0 + .2 + r()*.9;
+        c.beginPath(); c.arc(cx, cy, rad, a0, a1); c.stroke();
+      }
+    }
+    c.globalAlpha = 1;
+    motifs[m.motif](r, P, cx, cy);
+    // glitch bars
+    for (let i = 0; i < 6; i++){ c.fillStyle = i % 2 ? P[1] : P[3]; c.globalAlpha = .75; c.fillRect(r()*W*.6, r()*H, 120 + r()*500, 6 + r()*18); }
+    c.globalAlpha = 1;
+    // vertical title
+    c.fillStyle = P[1]; c.textAlign = 'center'; c.textBaseline = 'top';
+    const fs = m.k.length > 3 ? 190 : 230;
+    c.font = `900 ${fs}px "Noto Serif TC", serif`;
+    c.shadowColor = P[1]; c.shadowBlur = 30;
+    [...m.k].forEach((ch, i) => c.fillText(ch, W - 170, 110 + i*fs*1.02));
+    c.shadowBlur = 0;
+    // header + footer type
+    c.textAlign = 'left'; c.fillStyle = P[2];
+    c.font = '900 92px "Noto Serif TC", serif'; c.fillText('城南蜃樓', 90, 110);
+    c.font = '500 34px "IBM Plex Mono", monospace'; c.fillText('SOUTHOPIA / 32nd NTU ART FESTIVAL', 92, 230);
+    c.fillRect(90, H - 230, W - 180, 3);
+    c.font = '500 30px "IBM Plex Mono", monospace';
+    c.fillText(`MEMORY: ${m.en}`, 92, H - 190);
+    c.fillText(`SEED ${String(seed).padStart(6,'0')}  ·  概念示意，非官方`, 92, H - 140);
+    document.getElementById('seedLabel').textContent = `種子碼 ${String(seed).padStart(6,'0')}`;
+  }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(draw);
+})();
+</script>
+
+<script type="module">
+/* ---------- AR opera mask ---------- */
+const btn = document.getElementById('camBtn'), hint = document.getElementById('arHint');
+const video = document.getElementById('cam'), cv = document.getElementById('arCanvas'), c = cv.getContext('2d');
+const MASKS = {
+  red:   {base:'rgba(200,30,25,.62)',  eye:'#0b0b0b', line:'#ff4a3d', glow:'#ff4a3d'},
+  black: {base:'rgba(15,15,18,.72)',   eye:'#ece6da', line:'#ece6da', glow:'#ff4a3d'},
+  white: {base:'rgba(236,230,218,.66)',eye:'#111',    line:'#111',    glow:'#ff4a3d'},
+  cyber: {base:'rgba(20,90,110,.55)',  eye:'#07080d', line:'#2de2c4', glow:'#2de2c4'},
+};
+let mask = 'red', landmarker = null, running = false;
+document.querySelectorAll('#maskBtns button').forEach(b => b.onclick = () => {
+  mask = b.dataset.mask;
+  document.querySelectorAll('#maskBtns button').forEach(x => x.setAttribute('aria-pressed', x === b));
+});
+
+const OVAL = [10,338,297,332,284,251,389,356,454,323,361,288,397,365,379,378,400,377,152,148,176,149,150,136,172,58,132,93,234,127,162,21,54,103,67,109];
+const LEYE = [33,7,163,144,145,153,154,155,133,173,157,158,159,160,161,246];
+const REYE = [263,249,390,373,374,380,381,382,362,398,384,385,386,387,388,466];
+const LIPS = [61,146,91,181,84,17,314,405,321,375,291,409,270,269,267,0,37,39,40,185];
+const LBROW = [46,53,52,65,55], RBROW = [276,283,282,295,285];
+
+async function start(){
+  btn.disabled = true; hint.textContent = '載入臉部追蹤模型中…';
+  try {
+    const vision = await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs');
+    const files = await vision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+    landmarker = await vision.FaceLandmarker.createFromOptions(files, {
+      baseOptions: {modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task', delegate: 'GPU'},
+      runningMode: 'VIDEO', numFaces: 2,
+    });
+    const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user', width: 960, height: 720}});
+    video.srcObject = stream; await video.play();
+    hint.style.display = 'none'; btn.textContent = '鏡頭已開啟'; running = true;
+    loop();
+  } catch (e) {
+    console.error(e);
+    hint.textContent = '無法開啟鏡頭或載入模型。請確認瀏覽器已允許使用鏡頭，並用 https 開啟本頁。';
+    btn.disabled = false;
+  }
+}
+btn.onclick = start;
+
+function path(pts, idx, close = true){ c.beginPath(); idx.forEach((i, k) => k ? c.lineTo(pts[i].x, pts[i].y) : c.moveTo(pts[i].x, pts[i].y)); if (close) c.closePath(); }
+function centroid(pts, idx){ let x = 0, y = 0; idx.forEach(i => { x += pts[i].x; y += pts[i].y; }); return {x: x/idx.length, y: y/idx.length}; }
+function scaled(pts, idx, s, dy = 0){ const o = centroid(pts, idx); c.beginPath(); idx.forEach((i, k) => { const x = o.x + (pts[i].x - o.x)*s, y = o.y + (pts[i].y - o.y)*s*1.6 + dy; k ? c.lineTo(x, y) : c.moveTo(x, y); }); c.closePath(); }
+
+function drawMask(lm){
+  const M = MASKS[mask], W = cv.width, H = cv.height;
+  const p = lm.map(q => ({x: (1 - q.x)*W, y: q.y*H}));           // mirror
+  const faceH = Math.hypot(p[10].x - p[152].x, p[10].y - p[152].y);
+  c.save();
+  path(p, OVAL); c.fillStyle = M.base; c.fill();
+  c.clip();
+  // eye patches, enlarged and swept upward
+  c.fillStyle = M.eye;
+  scaled(p, LEYE, 1.9, -faceH*.02); c.fill();
+  scaled(p, REYE, 1.9, -faceH*.02); c.fill();
+  // forehead flame
+  const top = p[10], mid = p[9], nose = p[6];
+  c.beginPath();
+  c.moveTo(mid.x, mid.y);
+  c.quadraticCurveTo(mid.x - faceH*.08, (mid.y + top.y)/2, top.x, top.y - faceH*.05);
+  c.quadraticCurveTo(mid.x + faceH*.08, (mid.y + top.y)/2, mid.x, mid.y);
+  c.fillStyle = M.line; c.fill();
+  // nose bridge diamond
+  c.beginPath(); c.moveTo(nose.x, nose.y - faceH*.04); c.lineTo(nose.x + faceH*.03, nose.y); c.lineTo(nose.x, p[4].y); c.lineTo(nose.x - faceH*.03, nose.y); c.closePath();
+  c.fillStyle = M.eye; c.fill();
+  c.restore();
+  // neon strokes
+  c.save();
+  c.strokeStyle = M.line; c.shadowColor = M.glow; c.shadowBlur = 18; c.lineJoin = 'round'; c.lineCap = 'round';
+  c.lineWidth = faceH*.012; path(p, OVAL); c.stroke();
+  c.lineWidth = faceH*.022;
+  [LBROW, RBROW].forEach(b => { path(p, b, false); c.stroke(); });
+  // brows sweep to temples
+  [[LBROW, p[46], -1], [RBROW, p[276], 1]].forEach(([b, end, s]) => { const e = p[b[b.length-1]]; c.beginPath(); c.moveTo(e.x, e.y); c.quadraticCurveTo(end.x, end.y - faceH*.12, end.x - s*faceH*.06, end.y - faceH*.2); c.stroke(); });
+  c.lineWidth = faceH*.01;
+  path(p, LEYE); c.stroke(); path(p, REYE); c.stroke();
+  path(p, LIPS); c.stroke();
+  c.restore();
+}
+
+let last = -1;
+function loop(){
+  if (!running) return;
+  if (video.currentTime !== last){
+    last = video.currentTime;
+    const W = cv.width, H = cv.height;
+    c.save(); c.translate(W, 0); c.scale(-1, 1); c.drawImage(video, 0, 0, W, H); c.restore();
+    c.fillStyle = 'rgba(7,8,13,.35)'; c.fillRect(0, 0, W, H);
+    const res = landmarker.detectForVideo(video, performance.now());
+    (res.faceLandmarks || []).forEach(drawMask);
+    c.fillStyle = 'rgba(0,0,0,.16)'; for (let y = 0; y < H; y += 3) c.fillRect(0, y, W, 1);
+  }
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>
