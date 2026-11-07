@@ -1,37 +1,41 @@
 ---
-name: Southopia 應徵作品頁
+name: 城南蜃樓 主視覺提案
 colors:
-  bg: "#07080d"
-  surface: "#0f1119"
-  line: "#262a38"
-  text: "#ece6da"
-  muted: "#9c978d"
-  accent: "#ff4a3d"   # 霓虹朱紅，全頁唯一強調色
-  jade: "#2de2c4"     # 只用在畫布與 AR 線條，不用在介面元件
+  bg: "#11100f"
+  surface: "#1a1917"
+  line: "#34312d"
+  text: "#ece6dc"
+  muted: "#a39b8f"
+  accent: "#d8432f"   # 頁面介面唯一強調色；各方向的配色只出現在該方向區塊內
 fonts:
-  display: "Noto Serif TC" 700/900
-  body: "Inter", "Noto Sans TC" 400/500/700
-  mono: "IBM Plex Mono" 400
-radius: 2px（籤條、按鈕），畫布 0
-spacing: 4 8 12 16 24 40 64 112
+  display: "Noto Serif TC" 900
+  body: "Noto Sans TC" 400/500/700
+  mono: "JetBrains Mono" 400/700
+  kai: "LXGW WenKai TC"（只用在示範字體）
+radius: 2px
+spacing: 10（拼貼間距） 24 36 56 72 88
 ---
 
 # 判讀
 
-臺大藝術季《Southopia 城南蜃樓》應徵用的作品頁，用途是體驗。主題是東方賽博龐克：墨黑底、朱紅霓虹、明體標題。版面變化 7、動態 7、密度 4。
+臺大藝術季《城南蜃樓》主視覺提案頁，給設計部與各部門看方向。用途是體驗：每個方向用真實照片即時套上效果。版面變化 7、動態 5、密度 5。
 
 # 色彩
 
-只有深色主題（`color-scheme: dark`），作品頁的氛圍需要固定的暗場。朱紅用在按鈕、標題強調與分隔線；玉綠只出現在畫布裡。內文 #ece6da 對 #07080d 的對比約 15:1，次要文字 #9c978d 約 7:1。
+只有深色主題，讓照片與各方向的色票在同一個中性暗底上比較。介面只用一個朱紅強調色。三個方向各有四色色票：
+
+- 訊號干擾臉譜：#0B0B0B、#F1ECE4、#C8102E、#C6FF3D
+- 城南蜃樓：#141B2B、#E7C9A0、珍珠虹彩漸層、#C8402F
+- 外台 LED：#C4161C、#FFD23F、#FF3D7F、#38FF8C
 
 # 字型
 
-標題用 Noto Serif TC 900，帶戲曲刊頭的氣質；內文 Noto Sans TC，行高 1.75；標籤與程式字用 IBM Plex Mono。中文標題字距 0，不做全大寫小標。
+標題 Noto Serif TC 900，內文 Noto Sans TC，行高 1.75，內文寬度上限 34em 到 40em。標籤與資訊文字用 JetBrains Mono。中文標題字距 0。
 
 # 版面
 
-每個區塊版型不同：主視覺滿版畫布；AR 區左畫面右說明；海報區左控制右成品；工作坊用時間軸。內文寬度上限 34em。
+每個方向一個 12 欄拼貼：左側大圖是即時效果示範，右側是字體示範與參考照片，下方三欄寫配色、字體與圖案、延伸應用。手機寬度改成 6 欄。
 
 # 動態
 
-主視覺持續動畫，滑鼠位置改變蜃樓的扭曲程度；區塊進場淡入 400ms。`prefers-reduced-motion` 時主視覺只畫一張靜態圖。
+臉譜干擾框每 1.6 秒換位置；LED 掃描線、萬花筒持續動畫；蜃樓用 SVG 水波濾鏡。`prefers-reduced-motion` 時全部停在靜態畫面。
