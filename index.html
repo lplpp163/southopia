@@ -79,9 +79,9 @@ a:hover{text-decoration-color:var(--text)}
 .type .small{font-size:12px;margin-top:10px;opacity:.75;font-family:var(--mono)}
 
 /* ---- 1 訊號干擾臉譜 ---- */
-#d1{--c1:#4f8ff0}
-.shardtext{font-family:var(--serif);font-weight:900;font-size:clamp(72px,9vw,128px)!important;line-height:1.05;color:transparent;background:url(img/jn1.jpg) center 35%/cover;-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:1px rgba(244,239,230,.55)}
-.t1{--tb:#101826;--tc:#f4efe6}
+#d1{--c1:#2fd39b}
+.halftext{position:relative;font-family:var(--serif);font-weight:900;font-size:clamp(72px,9vw,128px)!important;line-height:1.05}.halftext .solid{clip-path:inset(0 50% 0 0);color:#f2ede4}.halftext .wire{position:absolute;left:0;top:0;clip-path:inset(0 0 0 50%);color:transparent;-webkit-text-stroke:1.5px #2fd39b;text-shadow:0 0 14px rgba(47,211,155,.45)}
+.t1{--tb:#0d0f0e;--tc:#f2ede4}
 .t1 .big{font-family:var(--serif);font-weight:900}
 .t1 .big b{font-family:var(--mono);font-weight:700;color:#c6ff3d;font-size:.5em;vertical-align:middle;margin-left:.3em}
 .halftone{background:#c6ff3d;color:#0b0b0b;display:flex;align-items:flex-end;padding:14px;font-family:var(--mono);font-size:12px;
@@ -205,7 +205,7 @@ html[lang="en"] .brief p,html[lang="en"] .lede{max-width:40em}
       </ol>
     </div>
     <nav class="toc" aria-label="方向">
-      <a href="#d1" data-en="&lt;span&gt;01&lt;/span&gt;Shard Pixels"><span>01</span>剪黏像素</a>
+      <a href="#d1" data-en="&lt;span&gt;01&lt;/span&gt;Face Circuit"><span>01</span>面譜電路</a>
       <a href="#d3" data-en="&lt;span&gt;02&lt;/span&gt;Mirage"><span>02</span>城南蜃樓</a>
       <a href="#d4" data-en="&lt;span&gt;03&lt;/span&gt;Golden Light Stage"><span>03</span>金光外台</a>
       <a href="#shared" data-en="&lt;span&gt;＋&lt;/span&gt;Shared elements"><span>＋</span>共用元素</a>
@@ -220,47 +220,47 @@ html[lang="en"] .brief p,html[lang="en"] .lede{max-width:40em}
   <div class="wrap">
     <div class="dir-head">
       <div class="num">01</div>
-      <h2 data-en="Shard Pixels&lt;small&gt;剪黏像素&lt;/small&gt;">剪黏像素<small>SHARD PIXELS</small></h2>
-      <p class="lede" data-en="&lt;i&gt;Jiannian&lt;/i&gt; is the cut-and-paste porcelain craft on Taiwanese temple roofs: artisans snip colored ceramic bowls into shards and set them piece by piece into gods and opera characters. It already builds images out of fragments, the same logic as pixels. In this direction one Taiwanese opera stage moves from photo, to hand-cut porcelain shards, to a clean pixel grid. The clash is irregular handmade shards against a machine grid; the harmony is that both rebuild a picture from fragments.">剪黏是台灣廟宇屋脊上的工藝：師傅把彩色瓷碗剪成碎片，一片片黏成神明和戲曲人物。它本來就是用碎片拼出影像，跟像素的邏輯相同。這個方向讓同一座歌仔戲戲台從照片、變成手剪的瓷片、再變成方正的像素。衝突是手工的不規則碎片對上機器的整齊方格，和諧是兩者都在用碎片重組畫面。</p>
+      <h2 data-en="Face Circuit&lt;small&gt;面譜電路&lt;/small&gt;">面譜電路<small>FACE CIRCUIT</small></h2>
+      <p class="lede" data-en="&lt;i&gt;Ba Jia Jiang&lt;/i&gt; (the Eight Generals) are a Taiwanese temple-procession troupe: performers paint their faces to become the deity’s guards on patrol. Everyone reads it as face paint, but it is Taiwan’s street face paint, not Peking opera. The paint is built from symmetric bold lines and color fields, and a circuit board is also a system of symmetric paths. In this direction half the face keeps its hand-painted lines, and on the other half those lines continue as circuit traces and data lines. The clash is brushstroke against machine routing; the harmony is that both are symmetric line systems.">八家將是台灣廟會的陣頭，成員在臉上畫面譜，扮成神明出巡時的部將。大家一看就知道是臉譜，但它是台灣街頭的臉譜，不是京劇。面譜由左右對稱的粗線條和色塊組成，電路板也是對稱的路徑系統。這個方向讓半張臉保留手繪面譜，另外半張的線條延伸成電路走線與資料線。衝突是手繪筆觸對上機器走線，和諧是兩者都是對稱的線條系統。</p>
     </div>
     <div class="board">
-      <div class="tile hero"><canvas id="cv1" aria-label="歌仔戲野台照片由左到右從照片、剪黏碎瓷片過渡到方格像素"></canvas><span class="cap" data-en="Photo → hand-cut porcelain shards → pixel grid">照片 → 手剪瓷片 → 方格像素</span></div>
-      <div class="tile s5 r3 type t1"><div class="big shardtext">百戲</div><div class="small" data-en="Headline filled with jiannian porcelain">主標填入剪黏瓷片</div></div>
-      <div class="tile s5 r3"><img src="img/jn1.jpg" alt="剪黏門神" style="object-position:center 40%"><span class="cap" data-en="Jiannian door gods">剪黏門神</span></div>
-      <div class="tile s4 r2"><canvas id="cv1b" aria-label="剪黏門神照片右半邊轉成像素"></canvas><span class="cap" data-en="Real jiannian, right half pixelated">真的剪黏，右半轉成像素</span></div>
-      <div class="tile s4 r2"><img src="img/jn2.jpg" alt="宜蘭城隍廟牆上的剪黏" style="object-position:center 45%"><span class="cap" data-en="Temple wall panel, Yilan">宜蘭城隍廟牆堵</span></div>
-      <div class="tile s4 r2"><img src="img/bajia.jpg" alt="繞境中的八家將" style="object-position:center 35%"><span class="cap" data-en="Ba Jia Jiang face paint: another possible base image">八家將面譜，也可以當底圖</span></div>
+      <div class="tile hero"><canvas id="cv1" aria-label="八家將面譜特寫，右半邊的線條延伸成發光的電路走線"></canvas><span class="cap" data-en="Left: hand-painted. Right: the lines become circuit traces">左半手繪面譜，右半線條變成電路走線</span></div>
+      <div class="tile s5 r3 type t1"><div class="big halftext"><span class="solid">百戲</span><span class="wire" aria-hidden="true">百戲</span></div><div class="small" data-en="Headline: one half solid, the other half wireframe">主標一半實心，一半變成走線</div></div>
+      <div class="tile s5 r3"><img src="img/bjj1.jpg" alt="台中八家將面譜特寫" style="object-position:30% 40%"><span class="cap" data-en="Ba Jia Jiang, Taichung">八家將，台中</span></div>
+      <div class="tile s4 r2"><canvas id="cv1b" aria-label="對稱的電路走線紋樣"></canvas><span class="cap" data-en="Pattern: symmetric traces">紋樣：對稱電路走線</span></div>
+      <div class="tile s4 r2"><img src="img/bjj3.jpg" alt="八家將成員" style="object-position:center 25%"><span class="cap" data-en="Every role has its own face paint">每個角色的面譜都不同</span></div>
+      <div class="tile s4 r2"><img src="img/bajia.jpg" alt="繞境中的八家將" style="object-position:center 35%"><span class="cap" data-en="On procession">出巡</span></div>
     </div>
     <div class="notes">
       <div>
         <h3 data-en="Color">配色</h3>
         <div class="swatches">
-          <div class="sw"><i style="background:#f4efe6"></i><span data-en="Porcelain #F4EFE6">瓷白 #F4EFE6</span></div>
-          <div class="sw"><i style="background:#1f4e9c"></i><span data-en="Bowl blue #1F4E9C">碗公藍 #1F4E9C</span></div>
-          <div class="sw"><i style="background:#2e9e6a"></i><span data-en="Glaze green #2E9E6A">釉綠 #2E9E6A</span></div>
-          <div class="sw"><i style="background:#d33a2c"></i><span data-en="Vermilion #D33A2C">朱紅 #D33A2C</span></div>
+          <div class="sw"><i style="background:#0d0f0e"></i><span data-en="Ink #0D0F0E">墨黑 #0D0F0E</span></div>
+          <div class="sw"><i style="background:#f2ede4"></i><span data-en="Base white #F2EDE4">粉白 #F2EDE4</span></div>
+          <div class="sw"><i style="background:#d7262b"></i><span data-en="Vermilion #D7262B">朱紅 #D7262B</span></div>
+          <div class="sw"><i style="background:#2fd39b"></i><span data-en="Circuit green #2FD39B">電路綠 #2FD39B</span></div>
         </div>
-        <p style="margin-top:12px" data-en="All colors come from glazed porcelain. The pixel side uses the same four, so the digital half and the handmade half share one palette.">顏色全部取自釉瓷。像素那一側也只用這四色，數位與手工共用同一套色票。</p>
+        <p style="margin-top:12px" data-en="The green and red that dominate Ba Jia Jiang face paint are also the green of a circuit board and the red of an indicator light, so the face and the circuit share one palette.">八家將面譜常見的綠與紅，剛好也是電路板的綠和指示燈的紅，臉和電路共用同一套顏色。</p>
       </div>
       <div>
         <h3 data-en="Type and patterns">字體與圖案</h3>
         <ul>
-          <li data-en="Headline letters filled or built with porcelain shards">主標字用瓷片填滿或拼成</li>
-          <li data-en="Pattern: a grid that shifts from irregular shards to squares, usable as a transition band">圖案：從不規則碎片漸變到方格的網格，可當轉場帶</li>
-          <li data-en="Temple roofs already stage opera scenes in jiannian, so the subject fits naturally">廟宇屋脊上的剪黏本來就常做戲齣人物，題材直接接得上</li>
+          <li data-en="Headline letters: one half solid, the other half wireframe">主標字一半實心，一半變成走線</li>
+          <li data-en="Pattern: symmetric circuit traces that can grow out of any face-paint line">圖案：對稱的電路走線，可以從任何面譜線條長出來</li>
+          <li data-en="The troupe has distinct roles (Gan, Liu, Xie, Fan and the Four Seasons), each with its own face, which makes a natural series">八家將有甘、柳、謝、范與春夏秋冬四季神，各有自己的面譜，可以做成一系列</li>
         </ul>
       </div>
       <div>
         <h3 data-en="Applications">延伸應用</h3>
         <ul>
-          <li data-en="Ceramic tile coasters: real porcelain, real pixels">磁磚杯墊：真的瓷，也是真的像素</li>
-          <li data-en="Stickers die-cut into shard shapes">貼紙：瓷片形狀模切</li>
-          <li data-en="Jacket: embroidery that turns from shards into pixels">外套：刺繡從碎片漸變成方格</li>
-          <li data-en="Portrait frame: the edges of the photo break into shards">形象照框：人像邊緣碎成瓷片</li>
+          <li data-en="PCB badge: a real circuit board cut in the shape of a face, with LEDs">電路板徽章：真的電路板做成面譜形狀，點上 LED</li>
+          <li data-en="Sticker set: one per role">貼紙：每個角色一款，成套收集</li>
+          <li data-en="Jacket: face on the back, half embroidery, half reflective circuit print">外套：背後面譜，一半刺繡、一半反光電路印</li>
+          <li data-en="Portrait frame: half a circuit face over the visitor’s face">形象照框：人像臉上加半張電路面譜</li>
         </ul>
       </div>
     </div>
-    <p class="refs"><span data-en="References: ">參考：</span><a href="https://smiletaiwan.cw.com.tw/index.php/article/4259" data-en="Jiannian master Chen San-huo, Tainan">台南剪黏師傅陳三火</a>、<a href="https://people.dyu.edu.tw/paper/9806813_c.pdf" data-en="Da-Yeh University study on jiannian">大葉大學剪黏研究</a>、<a href="https://www.thenewslens.com/article/195401" data-en="“Micro Galaxy” glove puppetry exhibition">《微物銀河》布袋戲展</a></p>
+    <p class="refs"><span data-en="References: ">參考：</span><a href="https://en.wikipedia.org/wiki/Pat_Ka_Chiong" data-en="Pat Ka Chiong (Wikipedia)">Pat Ka Chiong（維基百科）</a>、<a href="https://www.twreporter.org/a/photo-workshop-taiwan-god-border-human" data-en="The Reporter: photo essay on gods and humans">報導者〈神與人的邊界〉攝影專題</a>、<a href="https://taiwan-scene.com/?p=15285" data-en="Taiwan Scene on Ba Jia Jiang">Taiwan Scene 八家將介紹</a></p>
   </div>
 </section>
 
@@ -381,13 +381,13 @@ html[lang="en"] .brief p,html[lang="en"] .lede{max-width:40em}
     <table class="cmp">
       <thead><tr><th data-en="Direction">方向</th><th data-en="Base image">底圖</th><th data-en="Digital technique">科技手法</th><th data-en="Mood">調性</th><th data-en="Assets needed">需要的素材</th></tr></thead>
       <tbody>
-        <tr><td data-en="01 Shard Pixels">01 剪黏像素</td><td data-en="Ba Jia Jiang, glove puppets">八家將、布袋戲偶</td><td data-en="Porcelain shards shifting into pixels">剪黏碎片過渡到方格像素</td><td data-en="Harmony with tension">和諧中帶衝突</td><td data-en="Jiannian photos, opera figure photos">剪黏照片、戲曲人物照</td></tr>
+        <tr><td data-en="01 Face Circuit">01 面譜電路</td><td data-en="Ba Jia Jiang face paint">八家將面譜</td><td data-en="Face-paint lines extended into circuit traces">面譜線條延伸成電路走線</td><td data-en="Harmony with tension">和諧中帶衝突</td><td data-en="Ba Jia Jiang close-ups, circuit pattern">八家將近照、電路紋樣</td></tr>
         <tr><td data-en="02 Mirage">02 城南蜃樓</td><td data-en="Palm Boulevard, Liugong Canal, Taiwanese opera">椰林大道、瑠公圳、歌仔戲</td><td data-en="Liquify, ripple, double exposure">液化、水波、疊影</td><td data-en="Dreamy, slightly eerie">夢幻、微詭異</td><td data-en="Permission for NTU archive photos">臺大舊照授權</td></tr>
         <tr><td data-en="03 Golden Light Stage">03 金光外台</td><td data-en="Open-air opera, Ba Jia Jiang, puppetry">野台戲、八家將、布袋戲</td><td data-en="LED dot matrix, scrolling sign, neon">LED 點陣、跑馬燈、霓虹</td><td data-en="Loud, distinctly Taiwanese">熱鬧、台味</td><td data-en="Temple festival photos, neon lettering">廟會照片、燈管字</td></tr>
       </tbody>
     </table>
     </div>
-    <p style="margin-top:20px;max-width:40em;color:#d6cfc3" data-en="Directions can be combined: the porcelain shards of 01 can texture the reflections in 02, and the LED matrix of 03 can replace the pixel grid in 01.">方向可以混用。例如 01 的碎瓷片可以當 02 水面倒影的質感，03 的 LED 點陣也能取代 01 的方格像素。</p>
+    <p style="margin-top:20px;max-width:40em;color:#d6cfc3" data-en="Directions can be combined: the circuit traces of 01 can grow into the reflections of 02, and the LED dots of 03 can light the ends of the traces in 01.">方向可以混用。例如 01 的電路走線可以長進 02 的水面倒影，03 的 LED 點陣也能點亮 01 電路的端點。</p>
   </div>
 </section>
 </main>
@@ -399,12 +399,12 @@ html[lang="en"] .brief p,html[lang="en"] .lede{max-width:40em}
     <p>
       <span data-en="Ba Jia Jiang: ">八家將：</span><a href="https://commons.wikimedia.org/wiki/File:Ba_Jia_Jiang_at_a_parade.jpg">Ba Jia Jiang at a parade</a>，CC0 ·
       <span data-en="Fire breathing: ">八家將噴火：</span><a href="https://commons.wikimedia.org/wiki/File:Fire_breathing_performance_in_a_Ba-Jia-Jiang_(the_Eight_Infernal_Generals)_parade_in_Chiayi_City_(Taiwan).jpg">Fire breathing performance, Chiayi</a>，CC BY-SA 4.0 ·
-      <span data-en="Jiannian door gods: ">剪黏門神：</span><a href="https://commons.wikimedia.org/wiki/File:謝振發所作祈求吉慶剪黏.jpg">謝振發所作祈求吉慶剪黏</a>，CC0 ·
-      <span data-en="Temple wall jiannian: ">城隍廟剪黏：</span><a href="https://commons.wikimedia.org/wiki/File:宜蘭城隍廟對看牆水車堵剪黏-108-her-pa-1952-re-201911011456565dbbd63fc2f500.jpg">宜蘭城隍廟對看牆水車堵剪黏</a>，CC BY 3.0 TW ·
+      <span data-en="Ba Jia Jiang close-ups: ">八家將近照：</span><a href="https://commons.wikimedia.org/wiki/File:Ba_Jia_Jiang_Taichung_01.jpg">Ba Jia Jiang Taichung 01</a>、<a href="https://commons.wikimedia.org/wiki/File:Ba_Jia_Jiang_Taichung_02.jpg">02</a>，CC0 ·
+      <span data-en="Eight Generals member: ">八家將成員：</span><a href="https://commons.wikimedia.org/wiki/File:Member_of_the_Eight_Generals.jpg">Member of the Eight Generals</a>，CC BY 2.0 ·
       <span data-en="Glove puppets: ">布袋戲偶：</span><a href="https://commons.wikimedia.org/wiki/File:Hand_puppets_of_Taiwanese_Glove_puppetry_2023-04-11.jpg">Hand puppets of Taiwanese Glove puppetry</a>，CC BY 2.0 ·
       <span data-en="Royal Palm Boulevard: ">椰林大道：</span><a href="https://commons.wikimedia.org/wiki/File:NTU_Royal_Palm_Boulevard_20140407.jpg">NTU Royal Palm Boulevard 20140407</a>，CC0 ·
       <span data-en="Drunken Moon Lake: ">醉月湖：</span><a href="https://commons.wikimedia.org/wiki/File:Southeast_View_of_Drunken_Moon_Lake_20170205Fa.jpg">Southeast View of Drunken Moon Lake</a>，CC0 ·
-      <span data-en="Shiu-Kim Opera Troupe: ">秀琴歌劇團：</span><a href="https://commons.wikimedia.org/wiki/File:Shiu-Kim_Taiwanese_Ke-Tse_opera_Troupe_pan-sian,_20231029.jpg">Shiu-Kim Taiwanese Ke-Tse opera Troupe</a>、<a href="https://commons.wikimedia.org/wiki/File:Shiu-Kim_Taiwanese_Ke-Tse_opera_Troupe_performance_162838.jpg">performance 162838</a>，CC BY 4.0 ·
+      <span data-en="Shiu-Kim Opera Troupe: ">秀琴歌劇團：</span><a href="https://commons.wikimedia.org/wiki/File:Shiu-Kim_Taiwanese_Ke-Tse_opera_Troupe_pan-sian,_20231029.jpg">Shiu-Kim Taiwanese Ke-Tse opera Troupe</a>，CC BY 4.0 ·
       <span data-en="DongNing Temple stage: ">東寧宮野台：</span><a href="https://commons.wikimedia.org/wiki/File:A_Taiwanese_Opera_Show_before_the_Hsinchu_DongNing_Temple_at_the_end_of_Ghost_Festival.jpg">Hsinchu DongNing Temple</a>，CC BY-SA 4.0 ·
       <span data-en="Taihoku Imperial University: ">臺北帝大：</span><a href="https://commons.wikimedia.org/wiki/File:Taihoku_Imperial_University.JPG">Taihoku Imperial University</a>、<a href="https://commons.wikimedia.org/wiki/File:臺北帝國大學農林專門部.jpg"><span data-en="Agriculture school">農林專門部</span></a>，<span data-en="public domain">公有領域</span> ·
       <span data-en="Han acrobat figurines: ">漢代百戲俑：</span><a href="https://commons.wikimedia.org/wiki/File:Han_Pottery_Acrobats_(10340369004).jpg">Han Pottery Acrobats</a>、<a href="https://commons.wikimedia.org/wiki/File:Han_Pottery_Acrobats_(10340565353).jpg">(10340565353)</a>，CC0
@@ -421,47 +421,63 @@ html[lang="en"] .brief p,html[lang="en"] .lede{max-width:40em}
   function cover(ctx,img,W,H,fx=.5,fy=.5){const s=Math.max(W/img.width,H/img.height),w=img.width*s,h=img.height*s;ctx.drawImage(img,(W-w)*fx,(H-h)*fy,w,h);}
   function rnd(a,b){return a+Math.random()*(b-a);}
 
-  /* 01 剪黏像素：照片 → 手剪瓷片 → 方格像素 */
-  function shards(id,src,o){
-    load(src).then(img=>{
-      const cv=document.getElementById(id);
-      function draw(){
-        const ctx=fit(cv),W=cv.width,H=cv.height,c=Math.max(10,Math.round(W/o.cells));
-        const zone=(x,y)=>{const t=(x/W)*(1-o.tilt)+(y/H)*o.tilt;return t<o.a?0:(t<o.b?1:2);};
-        cover(ctx,img,W,H,o.fx,o.fy);
-        const bl=document.createElement('canvas');bl.width=W;bl.height=H;const bc=bl.getContext('2d');
-        bc.filter=`blur(${Math.round(c*.5)}px) saturate(1.9) contrast(1.2)`;cover(bc,img,W,H,o.fx,o.fy);
-        const sm=document.createElement('canvas');sm.width=Math.ceil(W/c);sm.height=Math.ceil(H/c);const sc=sm.getContext('2d');
-        sc.filter='saturate(1.5) contrast(1.15)';sc.drawImage(cv,0,0,sm.width,sm.height);
-        const nx=Math.ceil(W/c)+1,ny=Math.ceil(H/c)+1,V=[];
-        for(let j=0;j<=ny;j++){V[j]=[];for(let i=0;i<=nx;i++){const x=i*c,y=j*c,z=zone(x,y),jt=z===1?c*.42:0;V[j][i]=[x+rnd(-jt,jt),y+rnd(-jt,jt)];}}
-        ctx.lineJoin='round';
-        for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){
-          const z=zone(i*c+c/2,j*c+c/2);
-          if(z===2){ctx.imageSmoothingEnabled=false;ctx.drawImage(sm,i,j,1,1,i*c,j*c,c,c);ctx.imageSmoothingEnabled=true;continue;}
-          if(z!==1)continue;
-          const p=[V[j][i],V[j][i+1],V[j+1][i+1],V[j+1][i]];
-          const tris=Math.random()<.5?[[p[0],p[1],p[2]],[p[0],p[2],p[3]]]:[[p[0],p[1],p[3]],[p[1],p[2],p[3]]];
-          (Math.random()<.55?[p]:tris).forEach(t=>{
-            let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;t.forEach(q=>{x0=Math.min(x0,q[0]);y0=Math.min(y0,q[1]);x1=Math.max(x1,q[0]);y1=Math.max(y1,q[1]);});
-            ctx.save();ctx.beginPath();t.forEach((q,k)=>k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();ctx.clip();
-            const bw=Math.max(1,x1-x0),bh=Math.max(1,y1-y0);ctx.drawImage(bl,x0,y0,bw,bh,x0,y0,bw,bh);
-            const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,'rgba(255,255,255,.38)');g.addColorStop(.45,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(0,0,0,.18)');
-            ctx.fillStyle=g;ctx.fillRect(x0,y0,bw,bh);ctx.restore();
-            ctx.beginPath();t.forEach((q,k)=>k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();
-            ctx.strokeStyle='#d9d0bf';ctx.lineWidth=Math.max(1.2,c*.06);ctx.stroke();
-          });
-        }
-        ctx.strokeStyle='rgba(16,24,38,.45)';ctx.lineWidth=1;
-        for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){if(zone(i*c+c/2,j*c+c/2)===2)ctx.strokeRect(i*c+.5,j*c+.5,c,c);}
-        if(o.labels){ctx.font=`${Math.max(11,W/60)}px JetBrains Mono, monospace`;ctx.fillStyle='#f4efe6';ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=6;
-          o.labels.forEach(l=>ctx.fillText(l[0],l[1]*W,Math.max(22,W/32)));ctx.shadowBlur=0;}
+  /* 01 面譜電路：左半手繪面譜，右半線條延伸成電路走線 */
+  function traces(W,H,cx,o){
+    const g=Math.max(8,Math.round(W/o.grid)),T=[],cols=['#2fd39b','#2fd39b','#ff5a4a','#ffd166','#f2ede4'];
+    for(let k=0;k<o.n;k++){
+      let x=cx+rnd(o.x0,o.x1)*W, y=rnd(o.y0,o.y1)*H; x=Math.round(x/g)*g; y=Math.round(y/g)*g;
+      const pts=[[x,y]],steps=Math.round(rnd(4,o.len));let dir=0;
+      for(let s=0;s<steps;s++){
+        if(Math.random()<.28)dir=[0,0,1,-1][Math.floor(Math.random()*4)];
+        const L=g*Math.round(rnd(1,3));x+=L;y+=dir*L;if(x>W*1.05||y<0||y>H)break;pts.push([x,y]);
       }
-      let tmr;draw();addEventListener('resize',()=>{clearTimeout(tmr);tmr=setTimeout(draw,200);});
-    });
+      T.push({pts,c:cols[k%cols.length],w:g*rnd(.12,.22),t:Math.random()});
+    }
+    return {T,g};
   }
-  shards('cv1','img/stage.jpg',{fx:.45,fy:.5,cells:38,a:.3,b:.64,tilt:.12,labels:[['PHOTO',.03],['剪黏 SHARD',.36],['PIXEL',.8]]});
-  shards('cv1b','img/jn1.jpg',{fx:.5,fy:.35,cells:30,a:.5,b:.5,tilt:0});
+  function strokeT(ctx,tr,mirror,cx){
+    ctx.beginPath();tr.pts.forEach((q,k)=>{const x=mirror?2*cx-q[0]:q[0];k?ctx.lineTo(x,q[1]):ctx.moveTo(x,q[1]);});ctx.stroke();
+  }
+  function along(pts,t){
+    let L=0;const seg=[];for(let k=1;k<pts.length;k++){const d=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]);seg.push(d);L+=d;}
+    let r=t*L;for(let k=0;k<seg.length;k++){if(r<=seg[k]){const f=seg[k]?r/seg[k]:0;return [pts[k][0]+(pts[k+1][0]-pts[k][0])*f,pts[k][1]+(pts[k+1][1]-pts[k][1])*f];}r-=seg[k];}
+    return pts[pts.length-1];
+  }
+  load('img/bjj2.jpg').then(img=>{
+    const cv=document.getElementById('cv1');let ctx,W,H,base,set,cx;
+    function prep(){
+      ctx=fit(cv);W=cv.width;H=cv.height;cx=W*.43;
+      base=document.createElement('canvas');base.width=W;base.height=H;const b=base.getContext('2d');
+      cover(b,img,W,H,.47,.3);
+      const gr=b.createLinearGradient(cx-W*.04,0,cx+W*.22,0);gr.addColorStop(0,'rgba(6,20,16,0)');gr.addColorStop(1,'rgba(6,20,16,.86)');
+      b.fillStyle=gr;b.fillRect(cx-W*.04,0,W,H);
+      set=traces(W,H,cx,{n:44,grid:46,x0:-.02,x1:.06,y0:.14,y1:.9,len:16});
+      b.lineCap='round';b.lineJoin='round';
+      set.T.forEach(tr=>{b.strokeStyle=tr.c;b.lineWidth=tr.w;b.globalAlpha=.9;b.shadowColor=tr.c;b.shadowBlur=set.g*.6;strokeT(b,tr,false,cx);
+        const e=tr.pts[tr.pts.length-1];b.beginPath();b.arc(e[0],e[1],set.g*.28,0,7);b.fillStyle='#0d0f0e';b.fill();b.lineWidth=tr.w*.9;b.stroke();});
+      b.shadowBlur=0;b.globalAlpha=.16;b.lineWidth=1.2;
+      set.T.forEach(tr=>{b.strokeStyle=tr.c;strokeT(b,tr,true,cx);});
+      b.globalAlpha=1;
+    }
+    function frame(){
+      ctx.drawImage(base,0,0);
+      set.T.forEach(tr=>{tr.t=(tr.t+.004)%1;const p=along(tr.pts,tr.t);ctx.beginPath();ctx.arc(p[0],p[1],set.g*.16,0,7);ctx.fillStyle='#fff';ctx.shadowColor=tr.c;ctx.shadowBlur=set.g*.8;ctx.fill();});
+      ctx.shadowBlur=0;
+      if(!reduce)requestAnimationFrame(frame);
+    }
+    prep();frame();let tm;addEventListener('resize',()=>{clearTimeout(tm);tm=setTimeout(()=>{prep();if(reduce)frame();},200);});
+  });
+  (function(){ /* 對稱走線紋樣 */
+    const cv=document.getElementById('cv1b');
+    function draw(){
+      const ctx=fit(cv),W=cv.width,H=cv.height,cx=W/2;ctx.fillStyle='#0d0f0e';ctx.fillRect(0,0,W,H);
+      const set=traces(W,H,cx,{n:46,grid:34,x0:0,x1:.04,y0:.08,y1:.92,len:12});
+      ctx.lineCap='round';ctx.lineJoin='round';
+      set.T.forEach(tr=>{ctx.strokeStyle=tr.c;ctx.lineWidth=tr.w;[false,true].forEach(m=>{strokeT(ctx,tr,m,cx);
+        const e=tr.pts[tr.pts.length-1],x=m?2*cx-e[0]:e[0];ctx.beginPath();ctx.arc(x,e[1],set.g*.26,0,7);ctx.stroke();});});
+    }
+    draw();let tm;addEventListener('resize',()=>{clearTimeout(tm);tm=setTimeout(draw,200);});
+  })();
 
   /* 04 LED 點陣 */
   load('img/fire.jpg').then(img=>{
